@@ -38,10 +38,10 @@
     }
 
     async function showUsername(){
-        const response = await api(url, 'GET', `/users/${userId}`, "getting categories", null)
-        console.log(response)
+        const json = await api(url, 'GET', `/users/${userId}`, "getting categories", null)
+        console.log(json)
         const username = document.createElement("h1")
-        username.innerText = response.firstname
+        username.innerText = json.firstname
         const usernameElement = document.getElementById("username")
         usernameElement.appendChild(username)
     }

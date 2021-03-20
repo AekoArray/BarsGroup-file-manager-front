@@ -1,7 +1,8 @@
 const url = "http://localhost:8080"
 
 const json = {
-    token: ''
+    token: '',
+    firstname: ''
 }
 
 async function api(url, method, endpoint, message, data, headers) {

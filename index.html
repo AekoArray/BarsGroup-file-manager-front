@@ -6,6 +6,7 @@
     <script src="api.js"></script>
 </head>
 <body>
+<div id="username"></div>
 <form id="from" onsubmit="sendData()">
     <input id="input" type="text" placeholder="Write something...">
     <input id="file-input" type="file">
@@ -19,8 +20,6 @@
 </body>
 
 <script>
-
-    const url = "http://localhost:8080"
 
     async function sendData() {
 
@@ -38,19 +37,27 @@
         await api(url, 'POST', "/data/", "sending data", fileInput === undefined ? input : formData)
     }
 
-    async function showCategories() {
+    async function showFiles(filename) {
 
-            const json = await api(url, 'GET', "/category/", "getting categories", null)
-            const catElement = document.getElementById("categories")
-            catElement.innerHTML = ""
-            for (let category of json) {
-                const elem = document.createElement("li")
-                const a = document.createElement("a")
-                a.dataset.id = category.id
-                a.innerText = category.title
-                a.href = url + "/category/" + category.id
-                elem.appendChild(a)
-                catElement.appendChild(elem)
+        const userId = getCookie('id')
+        const response = await api(url, 'GET', `/user/${userId}`, "getting categories", null)
+        const username = document.createElement("h1")
+        username.innerText = response.name
+        const usernameElement = document.getElementById("username")
+        usernameElement.appendChild(username)
+
+        const json = await api(url, 'GET', `/users/${userId}/`+ filename, "getting categories", null)
+        const catElement = document.getElementById("categories")
+        catElement.innerHTML = ""
+        for (let category of json) {
+            const elem = document.createElement("li")
+            const a = document.createElement("a")
+            a.dataset.id = category.id
+            a.innerText = category.title
+            // a.href = url + "/category/" + category.id
+            // a.onclick = showFiles(`${category.id}`)
+            elem.appendChild(a)
+            catElement.appendChild(elem)
             }
     }
 
@@ -60,8 +67,8 @@
         }
     }
 
-    showCategories()
-    setInterval(showCategories, 3000)
+    showFiles("files")
+    setInterval(showFiles, 3000)
     setInterval(checkCookie, 3000)
 
 </script>

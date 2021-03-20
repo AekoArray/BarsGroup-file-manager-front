@@ -37,14 +37,16 @@
         await api(url, 'POST', "/data/", "sending data", fileInput === undefined ? input : formData)
     }
 
-    async function showFiles(filename) {
-
-        const userId = getCookie('id')
+    async function showUsername(){
         const response = await api(url, 'GET', `/user/${userId}`, "getting categories", null)
+        console.log(response)
         const username = document.createElement("h1")
         username.innerText = response.name
         const usernameElement = document.getElementById("username")
         usernameElement.appendChild(username)
+    }
+
+    async function showFiles(filename) {
 
         const json = await api(url, 'GET', `/users/${userId}/`+ filename, "getting categories", null)
         const catElement = document.getElementById("categories")
@@ -67,8 +69,11 @@
         }
     }
 
-    showFiles("files")
-    setInterval(showFiles, 3000)
+    const userId = getCookie('id')
+    console.log("userId",userId)
+    showUsername()
+    // showFiles("files")
+    // setInterval(showFiles, 3000)
     setInterval(checkCookie, 3000)
 
 </script>

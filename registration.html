@@ -25,16 +25,16 @@
         const email = emailElement.value
         const passwordElement = document.getElementById("password")
         const password = passwordElement.value
-        const data = {
-            username: username,
-            email: email,
-            password: password
-        };
+       const data = {
+           name: username,
+           login: email,
+           password: password
+       };
         console.log(data)
         const response = await api(url,'POST', "/reg/", "registration", JSON.stringify(data), {'Content-Type': 'application/json'})
        console.log(response)
         setCookie(response)
-       window.location.href = "index.html"
+       window.location.href = "auth.html"
     }
 
 </script>

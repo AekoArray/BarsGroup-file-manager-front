@@ -7,7 +7,7 @@
 </head>
 <body>
 <form onsubmit="sendForm()">
-    <input id="username" type="text" placeholder="username">
+    <input id="email" type="text" placeholder="email">
     <input id="password" type="password" placeholder="password">
     <input type="submit">
 </form>
@@ -18,12 +18,12 @@
 
         event.preventDefault()
 
-        const usernameElement = document.getElementById("username")
-        const username = usernameElement.value
+        const emailElement = document.getElementById("email")
+        const email = emailElement.value
         const passwordElement = document.getElementById("password")
         const password = passwordElement.value
         const data = {
-            username: username,
+            login: email,
             password: password
         };
         console.log(data)

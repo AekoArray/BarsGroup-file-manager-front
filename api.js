@@ -24,6 +24,7 @@ function setCookie(json) {
     let date = new Date(Date.now() + 86400e3);
     date = date.toUTCString();
     document.cookie = `token=${json.token}; expires=` + date;
+    document.cookie = ` id=${json.id}; expires=` + date;
 }
 
 function getCookie(name) {
